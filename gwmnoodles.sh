@@ -16,7 +16,7 @@ read vpcname
 
 echo $projectname
 echo $vpcname
-gcloud compute networks create $vpcname --project=$projectname --subnet-mode=custom --mtu=1460 --bgp-routing-m mode=regional
+gcloud compute networks create $vpcname --project=$projectname --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional
 
 
 echo "Finished with VPC"
@@ -39,6 +39,10 @@ read firstipv4range
 gcloud compute networks subnets create $firstsubnet --project=$projectname --description=Subnet\ with\ private-facing\ configuration --range=$firstipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1 --enable-private-ip-google-access
 
 
+echo " Please Wait Have Patience Please "
+
+
+
 
 
 
@@ -51,6 +55,11 @@ echo "Provide the IPv4 Range"
 read secondipv4range
 
 gcloud compute networks subnets create $secondsubnet --project=$projectname --description=Subnet\ with\ private-facing\ configuration --range=$secondipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast2 --enable-private-ip-google-access
+
+
+echo " Please Wait Have Patience Please "
+
+
 
 
 
@@ -66,6 +75,13 @@ read thirdipv4range
 
 gcloud compute networks subnets create $firstpublicsubnet --project=$projectname --description=Subnet\ with\ public-facing\ configuration --range=$thirdipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1
 
+echo " Please Wait Have Patience Please "
+
+
+
+
+
+
 
 #THIS IS FOR THE SECOND PUBLIC SUBNET
 
@@ -80,6 +96,8 @@ gcloud compute networks subnets create $secondpublicsubnet --project=$projectnam
 
 
 
+
+echo " Please Wait Have Patience Please "
 echo " "
 echo " "
 echo " "

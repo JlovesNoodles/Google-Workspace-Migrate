@@ -137,6 +137,19 @@ echo "Finished with Firewall"
 
 
 
+echo "Creating Now the VM Instance"
+
+
+echo " Creating the Platform Server"
+echo "Provide the name for the server"
+read platformname
+
+echo "Enter Service Account "
+read serviceaccount
+
+gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+
+
 
 
 

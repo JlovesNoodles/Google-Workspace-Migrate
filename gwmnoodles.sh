@@ -103,6 +103,43 @@ echo " "
 echo " "
 echo "Finished with the subnets"
 
+
+
+echo " "
+echo " "
+echo " "
+echo "Now Configuring Firewall Rules"
+
+echo " "
+echo " "
+echo " "
+echo "Provide the Firewall Rule name"
+read firewallrulename
+
+echo " Please Wait Have Patience Please "
+
+gcloud compute --project=$firewallrulename firewall-rules create $vpcname-allow-bidi-ingress --description="bidirectional access" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5131 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+gcloud compute --project=$firewallrulename firewall-rules create $vpcname-allow-bidi-engress --direction=EGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5131 --destination-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+
+gcloud compute --project=$firewallrulename firewall-rules create $vpcname-vpc-allow-mysql --description="mysqldb access" --direction=INGRESS --priority=1000 --network=g$vpcname --action=ALLOW --rules=tcp:3306 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+gcloud compute --project=$firewallrulename firewall-rules create $vpcname-vpc-allow-couchdb --description="couchDB access" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5984 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+
+gcloud compute --project=$firewallrulename firewall-rules create $vpcname-vpc-allow-apis --description="apis" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:443 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+gcloud compute --project=$firewallrulename firewall-rules create $vpcname-vpc-allow-rdp --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3389 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+
+echo "Finished with Firewall"
+
+
+
+
+
+
 }
 createvpc
 

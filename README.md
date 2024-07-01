@@ -1,5 +1,4 @@
-git clone https://github.com/JlovesNoodles/GWM.git
-
+git clone https://github.com/JlovesNoodles/Google-Workspace-Migrate.git
 
 cd GWM
 

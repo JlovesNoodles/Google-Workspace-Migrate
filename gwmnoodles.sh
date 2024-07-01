@@ -238,6 +238,8 @@ read serviceaccount
 
 
 #This will Create a VM Platform Server
+
+
 gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --project=$projectname \
     --zone=asia-southeast1-a \
@@ -247,11 +249,12 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --provisioning-model=STANDARD \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=gmecsample,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-balanced \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
-    --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
+    --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
 
 echo "  -----------------------------  "
@@ -263,15 +266,16 @@ echo "  -----------------------------  "
 
 #This will Create a SQL Server
 gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
-    --project=$projectname \
+    --project=bats-solutions-library \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-16 \
-    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
     --maintenance-policy=MIGRATE \
     --provisioning-model=STANDARD \
-    --service-account=$serviceaccount \
+    --service-account=985742192344-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-024701,image=projects/debian-cloud/global/images/debian-12-bookworm-v20240617,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
@@ -285,16 +289,17 @@ echo "  -----------------------------  "
 
 
 #This will Create a CouchDB
-gcloud compute instances create $platformname-prod-sea1-vm-couchdb \
-    --project=$projectname \
+gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
+    --project=bats-solutions-library \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-16 \
-    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
     --maintenance-policy=MIGRATE \
     --provisioning-model=STANDARD \
-    --service-account=$serviceaccount \
+    --service-account=985742192344-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-024701,image=projects/debian-cloud/global/images/debian-12-bookworm-v20240617,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
@@ -303,7 +308,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-couchdb \
 
 
 echo "  -----------------------------  "
-echo "      Couch Server Finished      " 
+echo "     CouchDB Server Finished     " 
 echo "  -----------------------------  "
 
 
@@ -311,17 +316,18 @@ echo "  -----------------------------  "
 gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
     --project=$projectname \
     --zone=asia-southeast1-a \
-    --machine-type=e2-standard-4 \
+    --machine-type=e2-standard-8 \
     --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
     --maintenance-policy=MIGRATE \
     --provisioning-model=STANDARD \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=windows-server-2019-20240701-025926,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20231213,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-balanced \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
-    --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
+    --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
 
 
@@ -329,6 +335,22 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
 echo "  -----------------------------  "
 echo "       Node Server Finished      " 
 echo "  -----------------------------  "
+
+
+
+sleep 3
+	echo -n " COMPILING PLEASE WAIT " 
+	for i in {1..50}; do
+	    echo -n "#"
+	    sleep 0.1
+	done | pv -lep -s 50 > /dev/null
+	echo -e "\nALL IS WELL, I WISH YOU ALL THE BEST OF EVERYTHING!" 
+	echo " "
+	echo " "
+	echo " "
+
+
+
 
 }
 chickengwm

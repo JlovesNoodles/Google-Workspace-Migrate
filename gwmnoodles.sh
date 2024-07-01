@@ -59,7 +59,7 @@ fi
 reminder
 
 
-function createvpc(){
+function chickengwm(){
 
 echo ""
 echo ""
@@ -247,13 +247,12 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --provisioning-model=STANDARD \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=gmecsample,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20231213,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-balanced \
+    --create-disk=auto-delete=yes,boot=yes,device-name=gmecsample,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-balanced \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
     --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
-
 
 echo "  -----------------------------  "
 echo "         Platform Finished       " 
@@ -262,11 +261,76 @@ echo "  -----------------------------  "
 
 
 
+#This will Create a SQL Server
+gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
+    --project=$projectname \
+    --zone=asia-southeast1-a \
+    --machine-type=e2-standard-16 \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
+    --maintenance-policy=MIGRATE \
+    --provisioning-model=STANDARD \
+    --service-account=$serviceaccount \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-024701,image=projects/debian-cloud/global/images/debian-12-bookworm-v20240617,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --labels=goog-ec-src=vm_add-gcloud \
+    --reservation-affinity=any
+
+
+echo "  -----------------------------  "
+echo "        SQL Server Finished      " 
+echo "  -----------------------------  "
+
+
+#This will Create a CouchDB
+gcloud compute instances create $platformname-prod-sea1-vm-couchdb \
+    --project=$projectname \
+    --zone=asia-southeast1-a \
+    --machine-type=e2-standard-16 \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
+    --maintenance-policy=MIGRATE \
+    --provisioning-model=STANDARD \
+    --service-account=$serviceaccount \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-024701,image=projects/debian-cloud/global/images/debian-12-bookworm-v20240617,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --labels=goog-ec-src=vm_add-gcloud \
+    --reservation-affinity=any
+
+
+echo "  -----------------------------  "
+echo "      Couch Server Finished      " 
+echo "  -----------------------------  "
+
+
+#This will Create a Node Server
+gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
+    --project=$projectname \
+    --zone=asia-southeast1-a \
+    --machine-type=e2-standard-4 \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
+    --maintenance-policy=MIGRATE \
+    --provisioning-model=STANDARD \
+    --service-account=$serviceaccount \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --create-disk=auto-delete=yes,boot=yes,device-name=windows-server-2019-20240701-025926,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20231213,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-balanced \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
+    --reservation-affinity=any
 
 
 
+echo "  -----------------------------  "
+echo "       Node Server Finished      " 
+echo "  -----------------------------  "
 
 }
-createvpc
+chickengwm
 
 

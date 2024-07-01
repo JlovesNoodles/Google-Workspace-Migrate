@@ -275,7 +275,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --service-account=985742192344-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
     --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
-    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-2,mode=rw,name=disk-2,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
@@ -299,7 +299,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --service-account=985742192344-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
     --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
-    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-3,mode=rw,name=disk-3,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
@@ -323,7 +323,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
     --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
-    --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=device-name=disk-4,mode=rw,name=disk-4,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \

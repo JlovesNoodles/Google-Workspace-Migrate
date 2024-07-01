@@ -1,6 +1,6 @@
 git clone https://github.com/JlovesNoodles/Google-Workspace-Migrate.git
 
-cd GWM
+cd Google-Workspace-Migrate
 
 
 chmod +x gwmnoodles.sh

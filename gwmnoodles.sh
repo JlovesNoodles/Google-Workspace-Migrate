@@ -219,14 +219,15 @@ echo "Finished with Firewall"
 
 
 echo "Creating Now the VM Instance"
-
 echo " Creating the Platform Server"
 echo " "
 echo " "
 echo " "
 echo "Provide the name for the server"
-ech0 "  *the name will be GIVENNAME-prod-sea1-vm-platform" 
+echo "  *the name will be GIVENNAME-prod-sea1-vm-platform" 
 read platformname
+
+
 echo " "
 echo " "
 echo " "

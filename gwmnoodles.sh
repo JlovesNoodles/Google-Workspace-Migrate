@@ -68,7 +68,9 @@ read projectname
 echo "Provide the name for VPC Name: "
 read vpcname
 
-
+echo " "
+echo " "
+echo " "
 
 
 echo $projectname
@@ -86,10 +88,14 @@ echo " Now Creating Subnets"
 
 
 #THIS IS FOR THE SECOND FIRST  PRIVATE SUBNET
-
+echo " "
+echo " "
+echo " "
 echo "Provide name for First PRIVATE Subnet"
 read firstsubnet
-
+echo " "
+echo " "
+echo " "
 echo "Enter the  IPv4 Range"
 read firstipv4range
 
@@ -105,9 +111,14 @@ echo " Please Wait Have Patience Please "
 
 
 #THIS IS FOR THE SECOND PRIVATE SUBNET
+echo " "
+echo " "
+echo " "
 echo "Provide name for Second PRIVATE Subnet"
 read secondsubnet
-
+echo " "
+echo " "
+echo " "
 echo "Provide the IPv4 Range"
 read secondipv4range
 
@@ -123,10 +134,14 @@ echo " Please Wait Have Patience Please "
 
 
 #THIS IS FOR THE FIRST PUBLIC SUBNET
-
+echo " "
+echo " "
+echo " "
 echo "Provide the name for the First PUBLIC Subnet"
 read firstpublicsubnet
-
+echo " "
+echo " "
+echo " "
 echo "Provide the IPv4 Range"
 read thirdipv4range
 
@@ -141,11 +156,15 @@ echo " Please Wait Have Patience Please "
 
 
 #THIS IS FOR THE SECOND PUBLIC SUBNET
-
+echo " "
+echo " "
+echo " "
 
 echo "Provide the name for the Second PUBLIC Subnet"
 read secondpublicsubnet
-
+echo " "
+echo " "
+echo " "
 echo "Provide the IPv4 Range"
 read fourthipv4range
 
@@ -173,6 +192,8 @@ echo " "
 echo "Provide the Firewall Rule name"
 read firewallrulename
 
+echo "  -----------------------------  "
+echo "  -----------------------------  "
 echo " Please Wait Have Patience Please "
 
 gcloud compute --project=$projectname firewall-rules create $vpcname-allow-bidi-ingress --description="bidirectional access" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5131 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
@@ -189,6 +210,9 @@ gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-a
 
 gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-rdp --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3389 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
+echo " "
+echo " "
+echo " "
 
 echo "Finished with Firewall"
 
@@ -196,18 +220,24 @@ echo "Finished with Firewall"
 
 echo "Creating Now the VM Instance"
 
-
 echo " Creating the Platform Server"
+echo " "
+echo " "
+echo " "
 echo "Provide the name for the server"
 ech0 "  *the name will be GIVENNAME-prod-sea1-vm-platform" 
 read platformname
-
+echo " "
+echo " "
+echo " "
 echo "Enter Service Account "
 read serviceaccount
 
 
 
-gcloud compute instances create gmecsample \
+
+#This will Create a VM Platform Server
+gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --project=$projectname \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-4 \
@@ -222,6 +252,16 @@ gcloud compute instances create gmecsample \
     --shielded-integrity-monitoring \
     --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
+
+
+echo "  -----------------------------  "
+echo "         Platform Finished       " 
+echo "  -----------------------------  "
+
+
+
+
+
 
 
 

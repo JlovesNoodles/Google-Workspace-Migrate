@@ -2,6 +2,63 @@
 #!HomeBrewByChickenNoodles
 
 
+
+function reminder(){
+
+echo " "
+echo " "
+echo " "
+echo " ----------------------------------------------------------------"
+echo "           HELLO WELCOME TO GWM MIGRATION AUTOMATION             "
+echo " ----------------------------------------------------------------"
+
+echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo "                Before we proceed just a few reminder            "
+echo "                                                                 "
+echo "     *Remember to have created a project the project name        "
+echo "     *Have the service account name ready                        "
+echo "     *Enable the API Needed                                      "
+echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+
+echo " ----------------------------------------------------------------"
+echo "        If you are ready now do you wanna proceed  Y or N        "
+echo " ----------------------------------------------------------------" 
+read choices
+
+if [[ $choices == "Y" || $choices == "y" ]]; then
+
+
+echo " ***************************************************************"
+echo "                      AIGHT LETS GO BRUH                        "
+echo " ***************************************************************"
+
+sleep 3
+	echo -n "STARTING THE PROGRAM PLEASE WAIT " 
+	for i in {1..50}; do
+	    echo -n "#"
+	    sleep 0.1
+	done | pv -lep -s 50 > /dev/null
+	echo -e "\nProgram has loaded Goodluck Migrating!" 
+	echo " "
+	echo " "
+	echo " "
+else 
+echo " "
+echo "Goodbye Amigo"
+exit
+fi
+
+
+
+
+
+
+
+}
+reminder
+
+
 function createvpc(){
 
 echo ""
@@ -147,8 +204,23 @@ read platformname
 echo "Enter Service Account "
 read serviceaccount
 
-gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
-
+gcloud compute instances create $platformname-prod-sea1-vm-platform \
+    --project=$projectname \
+    --zone=asia-southeast1-a \
+    --machine-type=e2-standard-4 \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
+    --no-restart-on-failure \
+    --maintenance-policy=MIGRATE \
+    --provisioning-model=STANDARD \
+    --service-account=$serviceaccount \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --tags=$platformname-prod-sea1-vm-platform \ 
+    --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20231213,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
+    --reservation-affinity=any
 
 
 

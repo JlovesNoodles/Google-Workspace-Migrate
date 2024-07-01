@@ -289,7 +289,7 @@ echo "  -----------------------------  "
 
 
 #This will Create a CouchDB
-gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
+gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --project=bats-solutions-library \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-16 \

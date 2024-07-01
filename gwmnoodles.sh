@@ -199,29 +199,29 @@ echo "Creating Now the VM Instance"
 
 echo " Creating the Platform Server"
 echo "Provide the name for the server"
+ech0 "  *the name will be GIVENNAME-prod-sea1-vm-platform" 
 read platformname
 
 echo "Enter Service Account "
 read serviceaccount
 
-gcloud compute instances create $platformname-prod-sea1-vm-platform \
+
+
+gcloud compute instances create gmecsample \
     --project=$projectname \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-4 \
     --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
-    --no-restart-on-failure \
     --maintenance-policy=MIGRATE \
     --provisioning-model=STANDARD \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --tags=$platformname-prod-sea1-vm-platform \ 
-    --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20231213,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=gmecsample,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20231213,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-balanced \
     --no-shielded-secure-boot \
     --shielded-vtpm \
     --shielded-integrity-monitoring \
     --labels=goog-gcp-marketplace=,goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
-
 
 
 

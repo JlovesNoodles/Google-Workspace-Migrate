@@ -269,7 +269,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --project=bats-solutions-library \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-16 \
-    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
     --maintenance-policy=MIGRATE \
     --provisioning-model=STANDARD \
     --service-account=985742192344-compute@developer.gserviceaccount.com \
@@ -293,7 +293,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --project=bats-solutions-library \
     --zone=asia-southeast1-a \
     --machine-type=e2-standard-16 \
-    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=$firstsubnet \
     --maintenance-policy=MIGRATE \
     --provisioning-model=STANDARD \
     --service-account=985742192344-compute@developer.gserviceaccount.com \

@@ -9,8 +9,10 @@ echo " "
 echo " "
 echo " "
 echo " ----------------------------------------------------------------"
-echo "           HELLO WELCOME TO GWM MIGRATION AUTOMATION             "
+echo "           HELLO WELCOME TO GWM MIGRATION AUTOMATION             " | lolcat
 echo " ----------------------------------------------------------------"
+
+cowsay -c dragon -t This is a Proud ChickenNoodles Creation Recipe!!! | lolcat
 
 echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "                Before we proceed just a few reminder            "
@@ -25,7 +27,7 @@ echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 
 echo " ----------------------------------------------------------------"
-echo "        If you are ready now do you wanna proceed  Y or N        "
+echo "        If you are ready now do you wanna proceed  Y or N        " | lolcat
 echo " ----------------------------------------------------------------" 
 read choices
 
@@ -33,7 +35,7 @@ if [[ $choices == "Y" || $choices == "y" ]]; then
 
 
 echo " ***************************************************************"
-echo "                      AIGHT LETS GO BRUH                        "
+echo "                      AIGHT LETS GO BRUH                        " | lolcat
 echo " ***************************************************************"
 
 sleep 3
@@ -66,9 +68,16 @@ function chickengwm(){
 
 echo ""
 echo ""
-echo "Provide the name for Project Name: "
+
+echo " -----------------------------------"
+echo " Provide the name for Project Name: " | lolcat
+echo " -----------------------------------"
 read projectname
-echo "Provide the name for VPC Name: "
+
+
+echo " -----------------------------------"
+echo "    Provide the name for VPC Name:  " | lolcat
+echo " -----------------------------------"
 read vpcname
 
 echo " "
@@ -80,19 +89,20 @@ echo $projectname
 echo $vpcname
 
 echo " ---------------------------------"
-echo "      Creating the VPC Now        "
-echo " Please Wait Have Patience Please "
+echo "      Creating the VPC Now        " | lolcat
+echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 gcloud compute networks create $vpcname --project=$projectname --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional
 
-
-echo "Finished with VPC"
+echo "----------------------------------"
+echo "         Finished the VPC         " | lolcat
+echo "    Thank you for your patience   " | lolcat
+echo "----------------------------------"
 echo " "
 echo " "
-echo " "
-echo " "
-echo " Now Creating Subnets" 
-
+echo "----------------------------------"
+echo "        Now Creating Subnets      " | lolcat
+echo "----------------------------------"
 
 
 #THIS IS FOR THE SECOND FIRST  PRIVATE SUBNET
@@ -109,8 +119,8 @@ read firstipv4range
 
 echo " "
 echo " ---------------------------------"
-echo "     Creating the subnet Now      "
-echo " Please Wait Have Patience Please "
+echo "     Creating the subnet Now      " | lolcat
+echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 
 gcloud compute networks subnets create $firstsubnet --project=$projectname --description=Subnet\ with\ private-facing\ configuration --range=$firstipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1 --enable-private-ip-google-access
@@ -137,8 +147,8 @@ read secondipv4range
 
 echo " "
 echo " ---------------------------------"
-echo "     Creating the subnet Now      "
-echo " Please Wait Have Patience Please "
+echo "     Creating the subnet Now      " | lolcat
+echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 
 
@@ -166,16 +176,11 @@ read thirdipv4range
 
 echo " "
 echo " ---------------------------------"
-echo "     Creating the subnet Now      "
-echo " Please Wait Have Patience Please "
+echo "     Creating the subnet Now      " | lolcat
+echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 
 gcloud compute networks subnets create $firstpublicsubnet --project=$projectname --description=Subnet\ with\ public-facing\ configuration --range=$thirdipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1
-
-
-
-
-
 
 
 
@@ -195,8 +200,8 @@ read fourthipv4range
 
 echo " "
 echo " ---------------------------------"
-echo "     Creating the subnet Now      "
-echo " Please Wait Have Patience Please "
+echo "     Creating the subnet Now      " | lolcat
+echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 
 gcloud compute networks subnets create $secondpublicsubnet --project=$projectname --description=Subnet\ with\ public-facing\ configuration --range=$fourthipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast2
@@ -206,7 +211,7 @@ gcloud compute networks subnets create $secondpublicsubnet --project=$projectnam
 
 echo " "
 echo " ---------------------------------"
-echo "        Subnets are all Done      "
+echo "        Subnets are all Done      " | lolcat
 echo "----------------------------------"
 
 
@@ -215,18 +220,19 @@ echo " "
 echo " "
 echo " "
 echo " ---------------------------------"
-echo "  Now Configuring Firewall Rules  "
+echo "  Now Configuring Firewall Rules  " | lolcat
 echo "----------------------------------"
 
 echo " "
 echo " "
-echo " "
-echo "Provide the Firewall Rule name"
+echo " ---------------------------------"
+echo "  Provide the Firewall Rule Name  " | lolcat
+echo "----------------------------------"
 read firewallrulename
 
 echo " ---------------------------------"
-echo "     Creating the Firewall Now    "
-echo " Please Wait Have Patience Please "
+echo "     Creating the Firewall Now    " | lolcat
+echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 
 #this will allow the vm to communicate with each other
@@ -260,13 +266,13 @@ echo " "
 echo " "
 
 echo " ---------------------------------"
-echo " Finished with the Firewall Rules "
+echo " Finished with the Firewall Rules " | lolcat
 echo "----------------------------------"
 
 
 
 echo "-------------------------------------------- "
-echo " Will now Commence in creating the VM Needed "
+echo " Will now Commence in creating the VM Needed " | lolcat
 echo "-------------------------------------------- "
 
 sleep 3
@@ -282,14 +288,14 @@ sleep 3
 
 
 echo "-------------------------------------------- "
-echo "      Creating now the Platform Server       "
+echo "      Creating now the Platform Server       " | lolcat
 echo "-------------------------------------------- "
 
 
 echo " "
 echo "---------------------------------------------------"
-echo "  Please Provide the name for the server to be use "
-echo " *the name will be GIVENNAME-prod-sea1-vm-platform "
+echo "  Please Provide the name for the server to be use " | lolcat
+echo " *the name will be GIVENNAME-prod-sea1-vm-platform " | lolcat
 echo "---------------------------------------------------"
 read platformname
 
@@ -298,8 +304,8 @@ echo " "
 echo " "
 echo " "
 echo "-------------------------------------------- "
-echo "        Enter the Service Account            "
-echo "   *The Compute Engine Service Account*      "
+echo "        Enter the Service Account            " | lolcat
+echo "   *The Compute Engine Service Account*      " | lolcat
 echo "-------------------------------------------- "
 read serviceaccount
 
@@ -327,17 +333,22 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --reservation-affinity=any
 '
 
-
+echo " "
+echo " "
 echo "  -------------------------------------------  "
-echo "      Now Creating the Platform Please Wait    "
+echo "      Now Creating the Platform Please Wait    " | lolcat
 echo "  -------------------------------------------- "
-
+echo " "
+echo " "
 gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.2,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$projectname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname-gws-migrate/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
+echo " "
+echo " "
 echo "  -----------------------------  "
-echo "         Platform Finished       " 
+echo "         Platform Finished       "  | lolcat
 echo "  -----------------------------  "
-
+echo " "
+echo " "
 
 
 
@@ -360,18 +371,23 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
 '
+echo " "
+echo " "
 echo "  -------------------------------------------  "
-echo "      Now Creating the MySQLDB Please Wait     "
+echo "      Now Creating the MySQLDB Please Wait     " | lolcat
 echo "  -------------------------------------------- "
-
+echo " "
+echo " "
 
 gcloud compute instances create $platformname-prod-sea1-vm-mysqldb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.3,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-mysqldb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-mysqldb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
-
+echo " "
+echo " "
 echo "  -----------------------------  "
-echo "        SQL Server Finished      " 
+echo "        SQL Server Finished      "  | lolcat
 echo "  -----------------------------  "
-
+echo " "
+echo " "
 
 #This will Create a CouchDB
 :'
@@ -392,18 +408,25 @@ gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
 '
+
+echo " "
+echo " "
 echo "  -------------------------------------------  "
-echo "      Now Creating the CouchDB Please Wait     "
+echo "      Now Creating the CouchDB Please Wait     " | lolcat
 echo "  -------------------------------------------- "
+echo " "
+echo " "
 
 gcloud compute instances create $platformname-prod-sea1-vm-couchdb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.4,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-couchdb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-couchdb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
-
+echo " "
+echo " "
 echo "  -----------------------------  "
-echo "     CouchDB Server Finished     " 
+echo "     CouchDB Server Finished     "  | lolcat
 echo "  -----------------------------  "
-
+echo " "
+echo " "
 
 #This will Create a Node Server
 :'
@@ -426,22 +449,27 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
 '
 
 
-
+echo " "
+echo " "
 echo "  -------------------------------------------  "
-echo "    Now Creating the Node Server Please Wait   "
+echo "    Now Creating the Node Server Please Wait   " | lolcat
 echo "  -------------------------------------------- "
+echo " "
+echo " "
 gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
-
+echo " "
+echo " "
 echo "  -----------------------------  "
-echo "       Node Server Finished      " 
+echo "       Node Server Finished      "  | lolcat
 echo "  -----------------------------  "
-
+echo " "
+echo " "
 
 
 sleep 3
-	echo -n " SETTING EVERYTHING UP FOR YOU COZ YOU SPECIAL DAWG"
+	echo -n " SETTING EVERYTHING UP FOR YOU COZ YOU SPECIAL DAWG" | lolcat
 	for i in {1..50}; do
 	    echo -n "#"
 	    sleep 0.1

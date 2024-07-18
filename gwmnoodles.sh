@@ -18,6 +18,9 @@ echo "                                                                 "
 echo "     *Remember to have created a project the project name        "
 echo "     *Have the service account name ready                        "
 echo "     *Enable the API Needed                                      "
+echo "     *This is a straight forward automation, if you messed up    "
+echo "     something you have to delete, and start again from top.     "
+echo "     *I'll put looping on the next update. Just bit busy now.    "
 echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 

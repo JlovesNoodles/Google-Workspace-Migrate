@@ -75,6 +75,11 @@ echo " "
 
 echo $projectname
 echo $vpcname
+
+echo " ---------------------------------"
+echo "      Creating the VPC Now        "
+echo " Please Wait Have Patience Please "
+echo "----------------------------------"
 gcloud compute networks create $vpcname --project=$projectname --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional
 
 
@@ -99,10 +104,15 @@ echo " "
 echo "Enter the  IPv4 Range"
 read firstipv4range
 
+echo " "
+echo " ---------------------------------"
+echo "     Creating the subnet Now      "
+echo " Please Wait Have Patience Please "
+echo "----------------------------------"
+
 gcloud compute networks subnets create $firstsubnet --project=$projectname --description=Subnet\ with\ private-facing\ configuration --range=$firstipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1 --enable-private-ip-google-access
 
 
-echo " Please Wait Have Patience Please "
 
 
 
@@ -122,10 +132,15 @@ echo " "
 echo "Provide the IPv4 Range"
 read secondipv4range
 
+echo " "
+echo " ---------------------------------"
+echo "     Creating the subnet Now      "
+echo " Please Wait Have Patience Please "
+echo "----------------------------------"
+
+
 gcloud compute networks subnets create $secondsubnet --project=$projectname --description=Subnet\ with\ private-facing\ configuration --range=$secondipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast2 --enable-private-ip-google-access
 
-
-echo " Please Wait Have Patience Please "
 
 
 
@@ -145,9 +160,16 @@ echo " "
 echo "Provide the IPv4 Range"
 read thirdipv4range
 
+
+echo " "
+echo " ---------------------------------"
+echo "     Creating the subnet Now      "
+echo " Please Wait Have Patience Please "
+echo "----------------------------------"
+
 gcloud compute networks subnets create $firstpublicsubnet --project=$projectname --description=Subnet\ with\ public-facing\ configuration --range=$thirdipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1
 
-echo " Please Wait Have Patience Please "
+
 
 
 
@@ -168,23 +190,30 @@ echo " "
 echo "Provide the IPv4 Range"
 read fourthipv4range
 
+echo " "
+echo " ---------------------------------"
+echo "     Creating the subnet Now      "
+echo " Please Wait Have Patience Please "
+echo "----------------------------------"
+
 gcloud compute networks subnets create $secondpublicsubnet --project=$projectname --description=Subnet\ with\ public-facing\ configuration --range=$fourthipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast2
 
 
 
 
-echo " Please Wait Have Patience Please "
 echo " "
-echo " "
-echo " "
-echo "Finished with the subnets"
+echo " ---------------------------------"
+echo "        Subnets are all Done      "
+echo "----------------------------------"
 
 
 
 echo " "
 echo " "
 echo " "
-echo "Now Configuring Firewall Rules"
+echo " ---------------------------------"
+echo "  Now Configuring Firewall Rules  "
+echo "----------------------------------"
 
 echo " "
 echo " "
@@ -192,46 +221,83 @@ echo " "
 echo "Provide the Firewall Rule name"
 read firewallrulename
 
-echo "  -----------------------------  "
-echo "  -----------------------------  "
+echo " ---------------------------------"
+echo "     Creating the Firewall Now    "
 echo " Please Wait Have Patience Please "
+echo "----------------------------------"
 
+#this will allow the vm to communicate with each other
+gcloud compute --project=$projectname firewall-rules create $vpcname-allow-all --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=all --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range --destination-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+#this will allow to have ping
+gcloud compute --project=$projectname firewall-rules create $vpcname-allow-icmp --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=icmp --source-ranges=0.0.0.0/0 --destination-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+#this allows bidirectional access on port 5131
 gcloud compute --project=$projectname firewall-rules create $vpcname-allow-bidi-ingress --description="bidirectional access" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5131 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
 gcloud compute --project=$projectname firewall-rules create $vpcname-allow-bidi-engress --direction=EGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5131 --destination-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
 
+#this is for the sql port
 gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-mysql --description="mysqldb access" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3306 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
+
+#this is for the couchdbport
 gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-couchdb --description="couchDB access" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:5984 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
-
+#this is to allow apis
 gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-apis --description="apis" --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:443 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
+
+#this is to allow rdp
 gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-rdp --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3389 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
 echo " "
 echo " "
 echo " "
 
-echo "Finished with Firewall"
+echo " ---------------------------------"
+echo " Finished with the Firewall Rules "
+echo "----------------------------------"
 
 
 
-echo "Creating Now the VM Instance"
-echo " Creating the Platform Server"
+echo "-------------------------------------------- "
+echo " Will now Commence in creating the VM Needed "
+echo "-------------------------------------------- "
+
+sleep 3
+	echo -n " Hold On While We Ready"
+	for i in {1..50}; do
+	    echo -n "#"
+	    sleep 0.1
+	done | pv -lep -s 50 > /dev/null
+	echo -e "\nIIIITTTTTSSSSSS TIMEEEEEEEE!!!"
+	echo " "
+	echo " "
+	echo " "
+
+
+echo "-------------------------------------------- "
+echo "      Creating now the Platform Server       "
+echo "-------------------------------------------- "
+
+
 echo " "
-echo " "
-echo " "
-echo "Provide the name for the server"
-echo "  *the name will be GIVENNAME-prod-sea1-vm-platform" 
+echo "---------------------------------------------------"
+echo "  Please Provide the name for the server to be use "
+echo " *the name will be GIVENNAME-prod-sea1-vm-platform "
+echo "---------------------------------------------------"
 read platformname
 
 
 echo " "
 echo " "
 echo " "
-echo "Enter Service Account "
+echo "-------------------------------------------- "
+echo "        Enter the Service Account            "
+echo "   *The Compute Engine Service Account*      "
+echo "-------------------------------------------- "
 read serviceaccount
 
 
@@ -239,7 +305,7 @@ read serviceaccount
 
 #This will Create a VM Platform Server
 
-
+: '
 gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --project=$projectname \
     --zone=asia-southeast1-a \
@@ -256,6 +322,9 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --shielded-integrity-monitoring \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
+'
+
+gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.2,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$projectname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname-gws-migrate/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 echo "  -----------------------------  "
 echo "         Platform Finished       " 
@@ -265,6 +334,7 @@ echo "  -----------------------------  "
 
 
 #This will Create a SQL Server
+:'
 gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --project=bats-solutions-library \
     --zone=asia-southeast1-a \
@@ -281,6 +351,9 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --shielded-integrity-monitoring \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
+'
+
+gcloud compute instances create $platformname-prod-sea1-vm-mysqldb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.3,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
 echo "  -----------------------------  "
@@ -289,6 +362,7 @@ echo "  -----------------------------  "
 
 
 #This will Create a CouchDB
+:'
 gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --project=bats-solutions-library \
     --zone=asia-southeast1-a \
@@ -305,6 +379,10 @@ gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --shielded-integrity-monitoring \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
+'
+
+gcloud compute instances create $platformname-prod-sea1-vm-couchdb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.4,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+
 
 
 echo "  -----------------------------  "
@@ -354,5 +432,6 @@ sleep 3
 
 }
 chickengwm
+
 
 

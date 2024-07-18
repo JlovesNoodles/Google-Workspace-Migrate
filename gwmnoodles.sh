@@ -327,6 +327,11 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --reservation-affinity=any
 '
 
+
+echo "  -------------------------------------------  "
+echo "      Now Creating the Platform Please Wait    "
+echo "  -------------------------------------------- "
+
 gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.2,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$projectname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname-gws-migrate/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 echo "  -----------------------------  "
@@ -355,8 +360,12 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
 '
+echo "  -------------------------------------------  "
+echo "      Now Creating the MySQLDB Please Wait     "
+echo "  -------------------------------------------- "
 
-gcloud compute instances create $platformname-prod-sea1-vm-mysqldb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.3,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+
+gcloud compute instances create $platformname-prod-sea1-vm-mysqldb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.3,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-mysqldb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-mysqldb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
 echo "  -----------------------------  "
@@ -383,8 +392,11 @@ gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
 '
+echo "  -------------------------------------------  "
+echo "      Now Creating the CouchDB Please Wait     "
+echo "  -------------------------------------------- "
 
-gcloud compute instances create $platformname-prod-sea1-vm-couchdb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.4,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+gcloud compute instances create $platformname-prod-sea1-vm-couchdb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.4,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-couchdb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-couchdb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
 
@@ -394,6 +406,7 @@ echo "  -----------------------------  "
 
 
 #This will Create a Node Server
+:'
 gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
     --project=$projectname \
     --zone=asia-southeast1-a \
@@ -410,6 +423,14 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
     --shielded-integrity-monitoring \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
+'
+
+
+
+echo "  -------------------------------------------  "
+echo "    Now Creating the Node Server Please Wait   "
+echo "  -------------------------------------------- "
+gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
 
@@ -420,7 +441,7 @@ echo "  -----------------------------  "
 
 
 sleep 3
-	echo -n " COMPILING PLEASE WAIT " 
+	echo -n " SETTING EVERYTHING UP FOR YOU COZ YOU SPECIAL DAWG"
 	for i in {1..50}; do
 	    echo -n "#"
 	    sleep 0.1

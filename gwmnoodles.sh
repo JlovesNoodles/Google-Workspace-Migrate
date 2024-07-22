@@ -25,6 +25,9 @@ echo "     something you have to delete, and start again from top.     "
 echo "     *I'll put looping on the next update. Just bit busy now.    "
 echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
+echo " "
+cowsay -c miki -t "PLEASE READ CAREFULLY AND DONT PROCEED WITH DOUBT"
+
 
 echo " ----------------------------------------------------------------"
 echo "        If you are ready now do you wanna proceed  Y or N        " | lolcat

@@ -17,11 +17,15 @@ cowsay -c dragon -t "This is a Proud ChickenNoodles Creation Recipe!!!" | lolcat
 echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "                Before we proceed just a few reminder            " | lolcat
 echo "                                                                 "
-echo "     *Remember to have created a project the project name        "
-echo "     *Have the service account name ready                        "
-echo "     *Enable the API Needed                                      "
+echo "     *Must already have a project created under your organization"
+echo "     *Remember the Project name                                  "
+echo "     *Have the service account name ready (compute engine)       "
+echo "     *Enabled the API Needed                                     "
+echo "     *This automation will ask for 2 Private and 2 Public        "
+echo "     Subnets, be sure to have it ready before hand               "
 echo "     *This is a straight forward automation, if you messed up    "
 echo "     something you have to delete, and start again from top.     "
+echo "     Though we recommend to use 172.16.252.0/24 for first Subnet "
 echo "     *I'll put looping on the next update. Just bit busy now.    "
 echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
@@ -462,6 +466,8 @@ echo "    Now Creating the Node Server Please Wait   " | lolcat
 echo "  -------------------------------------------- "
 echo " "
 echo " "
+
+
 gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-8 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 

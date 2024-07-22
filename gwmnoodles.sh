@@ -257,7 +257,12 @@ gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-a
 
 
 #this is to allow rdp
-gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-rdp --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3389 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+
+:'
+gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-rdp-internal --direction=EGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3389 --source-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
+'
+
+gcloud compute --project=$projectname firewall-rules create $vpcname-vpc-allow-rdp-external --direction=INGRESS --priority=1000 --network=$vpcname --action=ALLOW --rules=tcp:3389 --source-ranges=0.0.0.0/0 --destination-ranges=$firstipv4range,$secondipv4range,$thirdipv4range,$fourthipv4range
 
 echo " "
 echo " "
@@ -454,7 +459,7 @@ echo "    Now Creating the Node Server Please Wait   " | lolcat
 echo "  -------------------------------------------- "
 echo " "
 echo " "
-gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-8 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
 
 echo " "

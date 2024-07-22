@@ -44,13 +44,13 @@ sleep 3
 	    echo -n "#"
 	    sleep 0.1
 	done | pv -lep -s 50 > /dev/null
-	cowsay -c ghostbusters -t "Bruh, Why You Even Here?"  | lolcat
+	echo -e "\nProgram has loaded Goodluck Migrating!"
 	echo " "
 	echo " "
 	echo " "
 else 
 echo " "
-echo "Goodbye Amigo"
+cowsay -c ghostbusters -t "Bruh, Why You Even Here?"  | lolcat
 exit
 fi
 
@@ -477,9 +477,9 @@ sleep 3
 	    echo -n "#"
 	    sleep 0.1
 	done | pv -lep -s 50 > /dev/null
-	echo -e "\nALL IS WELL, I WISH YOU ALL THE BEST OF EVERYTHING!" 
 	echo " "
 	echo " "
+	cowsay -c cheese -t "I WISH YOU ALL THE BEST I BELIEVE IN YOU BROTHA"  | lolcat
 	echo " "
 
 

@@ -74,6 +74,8 @@ while true; do
     fi
 done
 
+}
+reminder
 
 
 
@@ -141,12 +143,6 @@ echo " Please Wait Have Patience Please " | lolcat
 echo "----------------------------------"
 
 gcloud compute networks subnets create $firstsubnet --project=$projectname --description=Subnet\ with\ private-facing\ configuration --range=$firstipv4range --stack-type=IPV4_ONLY --network=$vpcname --region=asia-southeast1 --enable-private-ip-google-access
-
-
-
-
-
-
 
 
 
@@ -502,9 +498,6 @@ sleep 3
 	echo " "
 	cowsay -c cheese -t "I WISH YOU ALL THE BEST I BELIEVE IN YOU BROTHA"  | lolcat
 	echo " "
-
-
-
 
 }
 chickengwm

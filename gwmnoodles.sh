@@ -5,6 +5,7 @@
 
 function reminder(){
 
+
 echo " "
 echo " "
 echo " "
@@ -38,28 +39,41 @@ echo "        If you are ready now do you wanna proceed  Y or N        " | lolca
 echo " ----------------------------------------------------------------" 
 read choices
 
-if [[ $choices == "Y" || $choices == "y" ]]; then
+while true; do
+
+        if [[ $choices == "Y" || $choices == "y" ]]; then
 
 
-echo " ***************************************************************"
-echo "                      AIGHT LETS GO BRUH                        " | lolcat
-echo " ***************************************************************"
+        echo " ***************************************************************"
+        echo "                      AIGHT LETS GO BRUH                        " | lolcat
+        echo " ***************************************************************"
 
-sleep 3
-	echo -n "STARTING THE PROGRAM PLEASE WAIT " 
-	for i in {1..50}; do
-	    echo -n "#"
-	    sleep 0.1
-	done | pv -lep -s 50 > /dev/null
-	echo -e "\nProgram has loaded Goodluck Migrating!"
-	echo " "
-	echo " "
-	echo " "
-else 
-echo " "
-cowsay -c ghostbusters -t "Bruh, Why You Even Here?"  | lolcat
-exit
-fi
+        sleep 3
+            echo -n "STARTING THE PROGRAM PLEASE WAIT "
+            for i in {1..50}; do
+                echo -n "#"
+                sleep 0.1
+            done | pv -lep -s 50 > /dev/null
+            echo -e "\nProgram has loaded Goodluck Migrating!"
+            echo " "
+            echo " "
+            echo " "
+
+
+        elif [[ $choices == "N" || $choices == "n" ]]; then
+
+        echo " "
+        cowsay -c ghostbusters -t "Bruh, Why You Even Here?"  | lolcat
+        exit
+        break
+
+
+        else
+            cowsay -c trex -t "Bruh Only Y and N are accepted come on now." | lolcat
+            continue
+
+    fi
+done
 
 
 }

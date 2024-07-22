@@ -70,6 +70,7 @@ while true; do
 
     else
         cowsay -c trex -t "Bruh Only Y and N are accepted come on now." | lolcat
+        continue
 
 
     fi

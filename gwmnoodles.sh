@@ -39,9 +39,14 @@ echo "        If you are ready now do you wanna proceed  Y or N        " | lolca
 echo " ----------------------------------------------------------------" 
 read choices
 
-#!/bin/bash
+
 
 while true; do
+
+    echo " ----------------------------------------------------------------"
+    echo "        If you are ready now do you wanna proceed  Y or N        " | lolcat
+    echo " ----------------------------------------------------------------"
+    read choices
 
     if [[ $choices == "Y" || $choices == "y" ]]; then
 
@@ -66,16 +71,14 @@ while true; do
         echo " "
         cowsay -c ghostbusters -t "Bruh, Why You Even Here?"  | lolcat
         exit
-        break
 
     else
+        echo " "
         cowsay -c trex -t "Bruh Only Y and N are accepted come on now." | lolcat
         continue
 
-
     fi
 done
-
 }
 reminder
 

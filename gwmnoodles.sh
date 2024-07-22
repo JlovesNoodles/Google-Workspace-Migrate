@@ -44,7 +44,7 @@ sleep 3
 	    echo -n "#"
 	    sleep 0.1
 	done | pv -lep -s 50 > /dev/null
-	echo -e "\nProgram has loaded Goodluck Migrating!" 
+	cowsay -c ghostbusters -t "Bruh, Why You Even Here?"  | lolcat
 	echo " "
 	echo " "
 	echo " "

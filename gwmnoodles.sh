@@ -34,19 +34,15 @@ echo " "
 cowsay -c miki -t "PLEASE READ CAREFULLY AND DONT PROCEED WITH DOUBT"
 
 
-echo " ----------------------------------------------------------------"
-echo "        If you are ready now do you wanna proceed  Y or N        " | lolcat
-echo " ----------------------------------------------------------------" 
-read choices
-
 
 
 while true; do
 
-    echo " ----------------------------------------------------------------"
-    echo "        If you are ready now do you wanna proceed  Y or N        " | lolcat
-    echo " ----------------------------------------------------------------"
-    read choices
+echo " ----------------------------------------------------------------"
+echo "        If you are ready now do you wanna proceed  Y or N        " | lolcat
+echo " ----------------------------------------------------------------"
+read choices
+
 
     if [[ $choices == "Y" || $choices == "y" ]]; then
 

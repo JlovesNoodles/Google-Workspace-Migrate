@@ -12,10 +12,10 @@ echo " ----------------------------------------------------------------"
 echo "           HELLO WELCOME TO GWM MIGRATION AUTOMATION             " | lolcat
 echo " ----------------------------------------------------------------"
 
-cowsay -c dragon -t This is a Proud ChickenNoodles Creation Recipe!!! | lolcat
+cowsay -c dragon -t "This is a Proud ChickenNoodles Creation Recipe!!!" | lolcat
 
 echo " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "                Before we proceed just a few reminder            "
+echo "                Before we proceed just a few reminder            " | lolcat
 echo "                                                                 "
 echo "     *Remember to have created a project the project name        "
 echo "     *Have the service account name ready                        "

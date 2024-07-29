@@ -121,8 +121,9 @@ echo "----------------------------------"
 echo " "
 echo " "
 
-projectvpc
 }
+projectvpc
+
 
 function subnets(){
 

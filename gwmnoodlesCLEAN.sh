@@ -120,8 +120,8 @@ echo "    Thank you for your patience   " | lolcat
 echo "----------------------------------"
 echo " "
 echo " "
-
 }
+
 projectvpc
 
 
@@ -334,7 +334,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     --provisioning-model=STANDARD \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --create-disk=device-name=disk-1,mode=rw,name=disk-1,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
@@ -351,7 +351,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-platform \
     echo " "
     echo " "
 
-    gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.2,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$projectname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+    gcloud compute instances create $platformname-prod-sea1-vm-platform --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-4 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.2,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-platform --create-disk=auto-delete=yes,boot=yes,device-name=$projectname-prod-sea1-vm-platform,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
      sleep 3
         echo -n " Hold up, finishing the instance "
@@ -385,7 +385,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     --provisioning-model=STANDARD \
     --service-account=985742192344-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --create-disk=device-name=disk-2,mode=rw,name=disk-2,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
@@ -401,7 +401,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-mysqldb \
     echo " "
     echo " "
 
-    gcloud compute instances create $platformname-prod-sea1-vm-mysqldb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.3,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-mysqldb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-mysqldb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+    gcloud compute instances create $platformname-prod-sea1-vm-mysqldb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.3,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-mysqldb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-mysqldb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
     sleep 3
         echo -n " Hold up, finishing the instance "
@@ -432,7 +432,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     --provisioning-model=STANDARD \
     --service-account=985742192344-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=50,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --create-disk=device-name=disk-3,mode=rw,name=disk-3,size=1000,type=projects/bats-solutions-library/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
@@ -449,7 +449,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-coachdb \
     echo " "
     echo " "
 
-    gcloud compute instances create $platformname-prod-sea1-vm-couchdb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.4,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-couchdb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-couchdb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+    gcloud compute instances create $platformname-prod-sea1-vm-couchdb --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-16 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.4,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-couchdb --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-couchdb,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=1000,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
      sleep 3
         echo -n " Hold up, finishing the instance "
@@ -480,7 +480,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
     --provisioning-model=STANDARD \
     --service-account=$serviceaccount \
     --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
-    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
+    --create-disk=auto-delete=yes,boot=yes,device-name=instance-20240701-031823,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=50,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --create-disk=device-name=disk-4,mode=rw,name=disk-4,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd \
     --no-shielded-secure-boot \
     --shielded-vtpm \
@@ -499,7 +499,7 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
     echo " "
 
 
-    gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-8 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240612,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
+    gcloud compute instances create $platformname-prod-sea1-vm-nodesvr01 --project=$projectname --zone=asia-southeast1-a --machine-type=e2-standard-8 --network-interface=network-tier=PREMIUM,nic-type=GVNIC,private-network-ip=172.16.252.5,stack-type=IPV4_ONLY,subnet=$firstsubnet --no-restart-on-failure --maintenance-policy=MIGRATE --provisioning-model=STANDARD --service-account=$serviceaccount --scopes=https://www.googleapis.com/auth/cloud-platform --enable-display-device --tags=$platformname-prod-sea1-vm-nodesvr --create-disk=auto-delete=yes,boot=yes,device-name=$platformname-prod-sea1-vm-nodesvr,image=projects/windows-cloud/global/images/windows-server-2019-dc-v20240711,mode=rw,size=200,type=projects/$projectname/zones/asia-southeast1-a/diskTypes/pd-ssd --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --labels=goog-ec-src=vm_add-gcloud --reservation-affinity=any
 
      sleep 3
         echo -n " Hold up, finishing the instance "
@@ -533,6 +533,3 @@ gcloud compute instances create $platformname-prod-sea1-vm-nodeserver01 \
 
 }
 createvm
-
-
-
